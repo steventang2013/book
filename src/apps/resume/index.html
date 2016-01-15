@@ -17,16 +17,24 @@
 
       <div class="container">
 
-        <h1>Tom Yeh</h1>
+        <h1>Steven Tang</h1>
 
-        <h2>Favorite Programming Languages</h2>
-        <ul class="collection">
-          <li class="collection-item">Javascript</li>
-          <li class="collection-item">Haskell</li>
+        <h2>Resume</h2>
+		
+		<h3>Education</h3>
+        <ul class="collection" id="education">
         </ul>
-
-        <h2>Favorite Food</h2>
-        <ul class="collection" id="foods">
+		
+		<h3>Programming Languages</h3>
+        <ul class="collection" id="planguage">
+        </ul>
+		
+		<h3>Projects</h3>
+		<ul class="collection" id="projects">
+        </ul>
+		
+		<h3>Skills</h3>
+		<ul class="collection" id="skills">
         </ul>
 
       </div>
@@ -34,15 +42,37 @@
       <script>
 
         // create a firebase reference to the root
-        var ref = new Firebase('https://hello-ucdd2.firebaseio.com/')
+        var ref = new Firebase('https://stangresumeapp.firebaseio.com/')
 
         // read data from the location bio/favorite_foods, only once
-        ref.child('bio/favorite_foods').once('value', function(snapshot){
-          var foods = snapshot.val()
-          foods.forEach(function(food){
-            $('#foods').append('<li class="collection-item">' + food + '</li>')
-          })
-        })
+        ref.once('value', function(snapshot){
+            snapshot.forEach(function(childSnapshot) {
+				var key = childSnapshot.key();
+				console.log(key);
+				if (key == "Education"){
+					getValue(childSnapshot.val(), '#education');
+				}
+				else if (key == "Programming Languages"){
+					getValue(childSnapshot.val(), '#planguage');
+				}
+				else if (key == "Projects"){
+					getValue(childSnapshot.val(), '#projects');
+				}
+				else if (key == "Skills") {
+					getValue(childSnapshot.val(), '#skills');
+				}
+          });
+        });
+		
+		var getValue = function(childValue, id){
+			var entryArr = [childValue.entry1, childValue.entry2, childValue.entry3, childValue.entry4, childValue.entry5, childValue.entry6];
+			for (i = 0; i < entryArr.length; i++){
+				if (entryArr[i] != null){
+					$(id).append('<li class="collection-item">' + entryArr[i] + '</li>');
+				}
+		
+			}
+		}
       </script>
     </body>
   </html>
