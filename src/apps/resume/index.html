@@ -48,7 +48,6 @@
         ref.once('value', function(snapshot){
             snapshot.forEach(function(childSnapshot) {
 				var key = childSnapshot.key();
-				console.log(key);
 				if (key == "Education"){
 					getValue(childSnapshot.val(), '#education');
 				}
