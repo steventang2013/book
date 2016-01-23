@@ -36,14 +36,21 @@
 		<h3>Skills</h3>
 		<ul class="collection" id="skills">
         </ul>
+		
+		<h3>Tasks</h3>
+		<ul class="collection" id="tasks">
+		</ul>
 
       </div>
 
       <script>
 
         // create a firebase reference to the root
+		var low = 'todos/Low'
+		var high = 'todos/High'
+		var med = 'todos/Medium'
         var ref = new Firebase('https://stangresumeapp.firebaseio.com/')
-
+		var refTask = new Firebase('https://rockemsockemrobotstodo.firebaseio.com/')
         // read data from the location bio/favorite_foods, only once
         ref.once('value', function(snapshot){
             snapshot.forEach(function(childSnapshot) {
@@ -63,6 +70,18 @@
           });
         });
 		
+		var getTask = function(childPath){
+			refTask.child(childPath).once('value', function(snapshot){
+				snapshot.forEach(function(childSnapshot) {
+				var childData = childSnapshot.val();
+				var childKey = childSnapshot.key();
+				if (childData.Assigned == "steventang2013"){
+					$('#tasks').append('<li class="collection-item"><b>'+ childData.Title +'</b><br>Complete: <font color="orange">'+ childData.Complete +'</font><br>Priority: <font color="orange"> High</font> </li> ')
+					}
+				})
+			})
+		}
+		
 		var getValue = function(childValue, id){
 			var entryArr = [childValue.entry1, childValue.entry2, childValue.entry3, childValue.entry4, childValue.entry5, childValue.entry6];
 			for (i = 0; i < entryArr.length; i++){
@@ -72,6 +91,10 @@
 		
 			}
 		}
+		
+		getTask(low);
+		getTask(high);
+		getTask(med);
       </script>
     </body>
   </html>
