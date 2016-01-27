@@ -48,7 +48,7 @@ ref.child('san_francisco/garages').once('value', function(snapshot){
 function displayGarages(garages){
   // lodash _.forEach https://lodash.com/docs#forEach
   _.forEach(garages, function(val, key){
-    $('#garages').append('<li class="collection-item">' + val['friendlyName'] + '</li>')
+    $('#garages').append('<li class="collection-item"><div class="collapsible-header">' + val['friendlyName'] + '</div><div class="collapsible-body"><p class"flow-text"><b>Open Spaces: </b> ' + val['open_spaces'] + '/' + val['total_spaces'] + '<br></p></div></li>')
   })
 }
       </script>
