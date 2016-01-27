@@ -15,42 +15,99 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
-      
+
+      <nav>
+        <div class="nav-wrapper teal lighten-2">
+          <div class="container">
+            <a href="index.html" class="brand-logo">SF Garage Space</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="garages.html"><i class="small material-icons">list</i>List</a></li>
+              <li><a href="garages_map.html"><i class="small material-icons">navigation</i>Map</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+              <li><a href="garages.html"><i class="small material-icons">list</i>List</a></li>
+              <li><a href="garages_map.html"><i class="small material-icons">navigation</i>Map</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
       <div class="container">
 
         <h1>Garages</h1>
-        <ul class="collection" id="garages">
+        <ul class="collapsible popout" data-collapsible="accordion" id="garages">
         </ul>
 
       </div>
 
       <script>
 
-// create a firebase reference to the root
-var ref = new Firebase('https://publicdata-parking.firebaseio.com');
+      // create a firebase reference to the root
+      var ref = new Firebase('https://publicdata-parking.firebaseio.com');
 
-var data
+      var data
 
-// read data from the location san_francisco/garages, only once
-ref.child('san_francisco/garages').once('value', function(snapshot){
-  data = snapshot.val()
-  console.log('data is loaded', data)
+      // read data from the location san_francisco/garages, only once
+      ref.child('san_francisco/garages').once('value', function(snapshot){
+        data = snapshot.val()
+        console.log('data is loaded', data)
 
-  // filter the data
-  var garages = _.filter(data, function(d){
-      // keep only those values (d) that has "open_spaces" as a field
-      return _.has(d, 'open_spaces')
-  })
+        // filter the data
+        var garages = _.filter(data, function(d){
+            // keep only those values (d) that has "open_spaces" as a field
+            return _.has(d, 'open_spaces')
+        })
 
-  displayGarages(garages)
-})
+        displayGarages(garages)
+      })
 
-function displayGarages(garages){
-  // lodash _.forEach https://lodash.com/docs#forEach
-  _.forEach(garages, function(val, key){
-    $('#garages').append('<li class="collection-item"><div class="collapsible-header">' + val['friendlyName'] + '</div><div class="collapsible-body"><p class"flow-text"><b>Open Spaces: </b> ' + val['open_spaces'] + '/' + val['total_spaces'] + '<br></p></div></li>')
-  })
-}
+      function displayGarages(garages){
+        // lodash _.forEach https://lodash.com/docs#forEach
+        _.forEach(garages, function(val, key){
+          if(val['hours'].length){
+            var textInsert = [];
+            var i = 0;
+            var length = val['hours'].length;
+            textInsert[i++] = '<li class="collection-item"><div class="collapsible-header">' + val['friendlyName'] + '</div><div class="collapsible-body"><p class"flow-text"><b>Open Spaces: </b> ' + val['open_spaces'] + '/' + val['total_spaces'];
+            for (var a = 0; a < length; a += 1) {
+              textInsert[i++] = '<br><b>Hours: </b>';
+              if(val['hours'][a]['BEG'] != null){
+                textInsert[i++] = val['hours'][a]['BEG'];}
+              if(val['hours'][a]['END'] != null){
+                textInsert[i++] = ' to ';
+                textInsert[i++] = val['hours'][a]['END'];}
+              if(val['hours'][a]['FROM'] != null){
+                textInsert[i++] = ', <b>Days:</b> ';
+                textInsert[i++] = val['hours'][a]['FROM'];}
+              if(val['hours'][a]['TO'] != null){
+                textInsert[i++] = ' to ';
+                textInsert[i++] = val['hours'][a]['TO'];}
+            }
+            textInsert[i++] = '</p></div></li>';
+            $('#garages').append(textInsert.join(''));
+          }
+          else{
+            var textInsert2 = [];
+            var j = 0;
+            textInsert2[j++] = '<li class="collection-item"><div class="collapsible-header">' + val['friendlyName'] + '</div><div class="collapsible-body"><p class"flow-text"><b>Open Spaces: </b> ' + val['open_spaces'] + '/' + val['total_spaces'];
+            textInsert2[j++] = '<br><b>Hours: </b>';
+            if(val['hours']['BEG'] != null){
+              textInsert2[j++] = val['hours']['BEG'];}
+            if(val['hours']['END'] != null){
+              textInsert2[j++] = ' to ';
+              textInsert2[j++] = val['hours']['END'];}
+            if(val['hours']['FROM'] != null){
+              textInsert2[j++] = ', <b>Days:</b> ';
+              textInsert2[j++] = val['hours']['FROM'];}
+            if(val['hours']['TO'] != null){
+              textInsert2[j++] = ' to ';
+              textInsert2[j++] = val['hours']['TO'];}
+            textInsert2[j++] = '</p></div></li>';
+            $('#garages').append(textInsert2.join(''));
+          }
+        })
+      }
       </script>
     </body>
   </html>
