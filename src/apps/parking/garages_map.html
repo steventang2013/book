@@ -25,12 +25,12 @@
       <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
 	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-      <div class="container">
 
-        <h1>Garages Map</h1>
-        <div id="map" style="height:500px"></div>
-
-      </div>
+        <div id="map"></div>
+		<script>
+			$('#map').css("height", ($(window).height()));
+			$('#map').css("width", ($(window).width()));
+		</script>
 
       <script>
 
@@ -54,7 +54,7 @@ var attributionText = 'Map data &copy; <a href="http://openstreetmap.org">OpenSt
 
 // create the map
 var map = L.map($('#map')[0]).setView([37.78, -122.41], 13)
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: attributionText,
     maxZoom: 18,
     id: 'doubleshow.noeko77m',
@@ -112,7 +112,7 @@ function drawGarages(garages){
 function createIcon(image, latlng){
 	var colorcon = L.icon({
 		iconUrl: image,
-		iconSize: [20, 40],
+		iconSize: [30, 50],
 		popupAnchor: [0, 0]
 	});
 	return colorcon;
