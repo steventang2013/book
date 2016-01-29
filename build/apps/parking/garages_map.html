@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!--Import stylesheet for twitter bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+
+      <!--Import stylesheet for Leaflet to work-->
+      <link rel="stylesheet" href="css/leaflet.css" />
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+      <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	  <script src="js/leaflet.js"></script>
+
+      <nav>
+        <div class="nav-wrapper teal lighten-2">
+          <div class="container">
+            <a href="index.html" class="brand-logo">SF Garage Space</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="garages.html"><i class="small material-icons">list</i>List</a></li>
+              <li><a href="garages_map.html"><i class="small material-icons">map</i>Map</a></li>
+              <li><a href="profiles.html"><i class="small material-icons">perm_identity</i>Crew</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+              <li><a href="garages.html"><i class="small material-icons">list</i>List</a></li>
+              <li><a href="garages_map.html"><i class="small material-icons">map</i>Map</a></li>
+              <li><a href="profiles.html"><i class="small material-icons">perm_identity</i>Crew</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+        <div id="map" style="position: absolute; top: 65; left: 0; z-index: -1;"></div>
+    <script>
+	  $(document).ready(function(){
+		$(".button-collapse").sideNav();
+	  });
+      $('#map').css("height", ($(window).height() - 64));
+      $('#map').css("width", ($(window).width()));
+    </script>
+
+    <script src="js/map.js"></script>
+    
+          <!--Modal-->
+      <div id="myModal" class="modal fade" style="height: 42%" role="dialog">
+
+      <!-- Modal content-->
+        <div class="modal-header">
+          <h4 class="modal-title" id="rate-title"></h4>
+        </div>
+        <div class="modal-body" id="content-stuff">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </body>
+  </html>
