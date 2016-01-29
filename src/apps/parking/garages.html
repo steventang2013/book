@@ -65,47 +65,73 @@
       function displayGarages(garages){
         // lodash _.forEach https://lodash.com/docs#forEach
         _.forEach(garages, function(val, key){
-          if(val['hours'].length){
-            var textInsert = [];
-            var i = 0;
-            var length = val['hours'].length;
-            textInsert[i++] = '<li class="collection-item"><div class="collapsible-header">' + val['friendlyName'] + '</div><div class="collapsible-body"><p class"flow-text"><b>Open Spaces: </b> ' + val['open_spaces'] + '/' + val['total_spaces'];
-            for (var a = 0; a < length; a += 1) {
-              textInsert[i++] = '<br><b>Hours: </b>';
-              if(val['hours'][a]['BEG'] != null){
-                textInsert[i++] = val['hours'][a]['BEG'];}
-              if(val['hours'][a]['END'] != null){
-                textInsert[i++] = ' to ';
-                textInsert[i++] = val['hours'][a]['END'];}
-              if(val['hours'][a]['FROM'] != null){
-                textInsert[i++] = ', <b>Days:</b> ';
-                textInsert[i++] = val['hours'][a]['FROM'];}
-              if(val['hours'][a]['TO'] != null){
-                textInsert[i++] = ' to ';
-                textInsert[i++] = val['hours'][a]['TO'];}
+          var txtInsrt = [];
+          var i = 0;
+          var hours = val['hours'];
+          var hrsLength = hours.length;
+          var rates = val['rates'];
+          var rateLength = rates.length;
+
+
+          txtInsrt[i++] = '<li class="collection-item"><div class="collapsible-header">' + val['friendlyName'] + '</div><div class="collapsible-body"><p><b>Open Spaces: </b> ' + val['open_spaces'] + '/' + val['total_spaces'] + '<br><b>Hours: </b>';
+
+          if(hrsLength){
+            for (var a = 0; a < hrsLength; a += 1) {
+              txtInsrt[i++] = '<br>';
+              if(hours[a]['FROM'] != null){
+                txtInsrt[i++] = hours[a]['FROM'];}
+              if(hours[a]['TO'] != null){
+                txtInsrt[i++] = ' to ';
+                txtInsrt[i++] = hours[a]['TO'];}
+              if(hours[a]['BEG'] != null){
+                txtInsrt[i++] = ', ';
+                txtInsrt[i++] = hours[a]['BEG'];}
+              if(hours[a]['END'] != null){
+                txtInsrt[i++] = ' to ';
+                txtInsrt[i++] = hours[a]['END'];}
             }
-            textInsert[i++] = '</p></div></li>';
-            $('#garages').append(textInsert.join(''));
           }
           else{
-            var textInsert2 = [];
-            var j = 0;
-            textInsert2[j++] = '<li class="collection-item"><div class="collapsible-header">' + val['friendlyName'] + '</div><div class="collapsible-body"><p class"flow-text"><b>Open Spaces: </b> ' + val['open_spaces'] + '/' + val['total_spaces'];
-            textInsert2[j++] = '<br><b>Hours: </b>';
-            if(val['hours']['BEG'] != null){
-              textInsert2[j++] = val['hours']['BEG'];}
-            if(val['hours']['END'] != null){
-              textInsert2[j++] = ' to ';
-              textInsert2[j++] = val['hours']['END'];}
-            if(val['hours']['FROM'] != null){
-              textInsert2[j++] = ', <b>Days:</b> ';
-              textInsert2[j++] = val['hours']['FROM'];}
-            if(val['hours']['TO'] != null){
-              textInsert2[j++] = ' to ';
-              textInsert2[j++] = val['hours']['TO'];}
-            textInsert2[j++] = '</p></div></li>';
-            $('#garages').append(textInsert2.join(''));
+            txtInsrt[i++] = '<br>';
+            if(hours['FROM'] != null){
+              txtInsrt[i++] = hours['FROM'];}
+            if(hours['TO'] != null){
+              txtInsrt[i++] = ' to ';
+              txtInsrt[i++] = hours['TO'];}
+            if(hours['BEG'] != null){
+              txtInsrt[i++] = ', ';
+              txtInsrt[i++] = hours['BEG'];}
+            if(hours['END'] != null){
+              txtInsrt[i++] = ' to ';
+              txtInsrt[i++] = hours['END'];}
           }
+
+          txtInsrt[i++] = '<br><b>Rates: </b>';
+
+          if(rateLength){
+            for (var a2 = 0; a2 < rateLength; a2 += 1) {
+              txtInsrt[i++] = '<br>';
+              if(rates[a2]['BEG'] != null){
+                txtInsrt[i++] = rates[a2]['BEG'];}
+              if(rates[a2]['END'] != null){
+                txtInsrt[i++] = ' to ';
+                txtInsrt[i++] = rates[a2]['END'];}
+              if(rates[a2]['DESC'] != null){
+                txtInsrt[i++] = rates[a2]['DESC'];}
+              if(rates[a2]['RATE'] != null){
+                txtInsrt[i++] = ',   ';
+                txtInsrt[i++] = '   $';
+                txtInsrt[i++] = rates[a2]['RATE'];}
+              if(rates[a2]['RQ'] != null){
+                txtInsrt[i++] = '   ';
+                txtInsrt[i++] = rates[a2]['RQ'];}
+              if(rates[a2]['RR'] != null){
+                txtInsrt[i++] = ',   ';
+                txtInsrt[i++] = rates[a2]['RR'];}
+            }
+          }
+          txtInsrt[i++] = '</p></div></li> ';
+          $('#garages').append(txtInsrt.join(''));
         })
       }
       </script>
