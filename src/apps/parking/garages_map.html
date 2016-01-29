@@ -27,24 +27,27 @@
 
       <nav>
         <div class="nav-wrapper teal lighten-2">
-          <div class="container">
+          <div class="container" style="height: 64px;">
             <a href="index.html" class="brand-logo">SF Garage Space</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-              <li><a href="garages.html"><i class="small material-icons">list</i>List</a></li>
-              <li><a href="garages_map.html"><i class="small material-icons">navigation</i>Map</a></li>
+              <li><a href="garages.html"><i class="small material-icons">list</i></a></li>
+              <li><a href="garages_map.html"><i class="small material-icons">map</i></a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
-              <li><a href="garages.html"><i class="small material-icons">list</i>List</a></li>
-              <li><a href="garages_map.html"><i class="small material-icons">navigation</i>Map</a></li>
+              <li><a href="garages.html"><i class="small material-icons">list</i></a></li>
+              <li><a href="garages_map.html"><i class="small material-icons">map</i></a></li>
             </ul>
           </div>
         </div>
       </nav>
 
-        <div id="map"></div>
+        <div id="map" style="position: absolute; top: 65; left: 0; z-index: -1;"></div>
     <script>
-      $('#map').css("height", ($(window).height()));
+	  $(document).ready(function(){
+		$(".button-collapse").sideNav();
+	  });
+      $('#map').css("height", ($(window).height() - 64));
       $('#map').css("width", ($(window).width()));
     </script>
 
