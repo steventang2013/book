@@ -7,7 +7,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 
       <!--Import stylesheet for Leaflet to work-->
-      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+      <link rel="stylesheet" href="css/leaflet.css" />
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,7 +18,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
-      <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+      <script src="js/leaflet.js"></script>
       <nav>
         <div class="nav-wrapper blue darken-3">
           <div class="container">
@@ -83,7 +83,6 @@ markersLayerGroup.addTo(map)
 
 // visualize cities on the map
 function mapCity(city){
-  console.log('mapCity', city)
   var latlng = [city.latitude, city.longitude]
   var circle;
   if (parseInt(city.currently.temperature) < 40){
@@ -123,7 +122,7 @@ function displayCity(city, name){
 	"<b>Weather Summary:</b> " + city.currently.summary + '<br>' +
 	"<b>Nearest Storm:</b> " + city.currently.nearestStormDistance + ' mi<br>' + '</li>')
 }
-
+markersLayerGroup.clearLayers()
       </script>
     </body>
   </html>
