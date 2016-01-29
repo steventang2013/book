@@ -48,7 +48,7 @@
       $('#map').css("width", ($(window).width()));
     </script>
 
-      <script>
+    <script>
 
 // create a firebase reference to the root
 var ref = new Firebase('https://publicdata-parking.firebaseio.com');
@@ -132,7 +132,6 @@ function createIcon(image, latlng){
     popupAnchor: [0, 0]
   });
   return colorcon;
-
 }
 
 function getRate(garage){
@@ -159,19 +158,19 @@ function generate_modal(rate0, rate1){
 
       </script>
     
-    <!--Modal-->
-<div id="myModal" class="modal fade" style="height: 42%" role="dialog">
+          <!--Modal-->
+      <div id="myModal" class="modal fade" style="height: 42%" role="dialog">
 
-    <!-- Modal content-->
-      <div class="modal-header">
-        <h4 class="modal-title" id="rate-title"></h4>
-      </div>
-      <div class="modal-body" id="content-stuff">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+      <!-- Modal content-->
+        <div class="modal-header">
+          <h4 class="modal-title" id="rate-title"></h4>
+        </div>
+        <div class="modal-body" id="content-stuff">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
 
-</div>
+      </div>
     </body>
   </html>
