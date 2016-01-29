@@ -1,69 +1,21 @@
-<!DOCTYPE html>
-  <html>
-    <head>
-      <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
-    <!--Import stylesheet for twitter bootstrap-->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    
-      <!--Import materialize.css-->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-
-      <!--Import stylesheet for Leaflet to work-->
-      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
-
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-
-    <body>
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-      <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
-      <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-      <nav>
-        <div class="nav-wrapper teal lighten-2">
-          <div class="container" style="height: 64px;">
-            <a href="index.html" class="brand-logo">SF Garage Space</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-              <li><a href="garages.html"><i class="small material-icons">list</i></a></li>
-              <li><a href="garages_map.html"><i class="small material-icons">map</i></a></li>
-            </ul>
-            <ul class="side-nav" id="mobile-demo">
-              <li><a href="garages.html"><i class="small material-icons">list</i></a></li>
-              <li><a href="garages_map.html"><i class="small material-icons">map</i></a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-        <div id="map" style="position: absolute; top: 65; left: 0; z-index: -1;"></div>
-    <script>
-	  $(document).ready(function(){
-		$(".button-collapse").sideNav();
-	  });
-      $('#map').css("height", ($(window).height() - 64));
-      $('#map').css("width", ($(window).width()));
-    </script>
-
-    <script>
 // create a firebase reference to the root
 var ref = new Firebase('https://publicdata-parking.firebaseio.com');
+
 var data;
+
 // read data from the location san_francisco/garages, only once
 ref.child('san_francisco/garages').once('value', function(snapshot){
   data = snapshot.val()
+
   var garages = _.filter(data, function(d){
       return _.has(d, 'open_spaces')
   })
+
   drawGarages(garages)
 })
+
 var attributionText = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a       href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
+
 // create the map
 var map = L.map($('#map')[0]).setView([37.78, -122.41], 13)
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -72,14 +24,18 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     id: 'doubleshow.noeko77m',
     accessToken: 'pk.eyJ1IjoiZG91Ymxlc2hvdyIsImEiOiJjaWZ5Y3B1eTE1MHRidWRtMG9uZXluajg4In0.u5ONW27Ly5cU7M5KYi6Y9Q'
 }).addTo(map)
+
 // create a layer group to hold all the markers
 var markersLayerGroup = L.layerGroup()
 // add the makers layer group to the map
 markersLayerGroup.addTo(map)
+
 // visualize garages on a map
 function drawGarages(garages){
+
   // clear all existing markers (if any)
   markersLayerGroup.clearLayers()
+
   _.forEach(garages, function(garage){
     var color_icon;
   var points = garage.points
@@ -105,14 +61,18 @@ function drawGarages(garages){
   }
   
   var rate_data = getRate(garage);
+
   var button = "<button onclick='generate_modal(\"" + rate_data[0] + "\" , \"" + rate_data[1] + "\")' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Rates</button>"
   L.marker(latlng, {icon: color_icon}).bindPopup("<b>" + garage_name + "</b><br>" + open + " open spaces <br>" + total + " total spaces <br>" +
                            "<div>" + button + "</div>").addTo(map);
                            
     // add the circle layer to the makers layer group
     //markersLayerGroup.addLayer(circle)
+
   })
+
 }
+
 function createIcon(image, latlng){
   var colorcon = L.icon({
     iconUrl: image,
@@ -121,6 +81,7 @@ function createIcon(image, latlng){
   });
   return colorcon;
 }
+
 function getRate(garage){
   var name = garage.friendlyName;
   var content = "";
@@ -136,26 +97,9 @@ function getRate(garage){
   garage_rate_info[1] = content;
   return garage_rate_info;
 }
+
 function generate_modal(rate0, rate1){
   //refresh
   document.getElementById('rate-title').innerHTML = rate0
   document.getElementById('content-stuff').innerHTML = rate1
 }
-      </script>
-    
-          <!--Modal-->
-      <div id="myModal" class="modal fade" style="height: 42%" role="dialog">
-
-      <!-- Modal content-->
-        <div class="modal-header">
-          <h4 class="modal-title" id="rate-title"></h4>
-        </div>
-        <div class="modal-body" id="content-stuff">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-
-      </div>
-    </body>
-  </html>
