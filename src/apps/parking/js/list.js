@@ -27,62 +27,35 @@
           var rates = val['rates'];
           var rateLength = rates.length;
 
-
           txtInsrt[i++] = '<li class="collection-item"><div class="collapsible-header">' + val['friendlyName'] + '</div><div class="collapsible-body"><p><b>Open Spaces: </b> ' + val['open_spaces'] + '/' + val['total_spaces'] + '<br><b>Hours: </b>';
 
-          if(hrsLength){
-            for (var a = 0; a < hrsLength; a += 1) {
-              txtInsrt[i++] = '<br>';
-              if(hours[a]['FROM'] != null){
-                txtInsrt[i++] = hours[a]['FROM'];}
-              if(hours[a]['TO'] != null){
-                txtInsrt[i++] = ' to ';
-                txtInsrt[i++] = hours[a]['TO'];}
-              if(hours[a]['BEG'] != null){
-                txtInsrt[i++] = ', ';
-                txtInsrt[i++] = hours[a]['BEG'];}
-              if(hours[a]['END'] != null){
-                txtInsrt[i++] = ' to ';
-                txtInsrt[i++] = hours[a]['END'];}
+          if(hrs_length){
+            for (var a = 0; a < hrs_length; a += 1) {
+              txt_insert[i++] = '<br>';
+              if(hours[a]['FROM']) txt_insert[i++] = hours[a]['FROM'];
+              if(hours[a]['TO']) txt_insert[i++] = ' to ' + hours[a]['TO'];
+              if(hours[a]['BEG']) txt_insert[i++] = ', ' + hours[a]['BEG'];
+              if(hours[a]['END']) txt_insert[i++] = ' to ' + hours[a]['END'];
             }
           }
           else{
-            txtInsrt[i++] = '<br>';
-            if(hours['FROM'] != null){
-              txtInsrt[i++] = hours['FROM'];}
-            if(hours['TO'] != null){
-              txtInsrt[i++] = ' to ';
-              txtInsrt[i++] = hours['TO'];}
-            if(hours['BEG'] != null){
-              txtInsrt[i++] = ', ';
-              txtInsrt[i++] = hours['BEG'];}
-            if(hours['END'] != null){
-              txtInsrt[i++] = ' to ';
-              txtInsrt[i++] = hours['END'];}
+              txt_insert[i++] = '<br>';
+              if(hours['FROM']) txt_insert[i++] = hours['FROM'];
+              if(hours['TO']) txt_insert[i++] = ' to ' + hours['TO'];
+              if(hours['BEG']) txt_insert[i++] = ', ' + hours['BEG'];
+              if(hours['END']) txt_insert[i++] = ' to ' + hours['END'];
           }
 
-          txtInsrt[i++] = '<br><b>Rates: </b>';
-
-          if(rateLength){
-            for (var a2 = 0; a2 < rateLength; a2 += 1) {
-              txtInsrt[i++] = '<br>';
-              if(rates[a2]['BEG'] != null){
-                txtInsrt[i++] = rates[a2]['BEG'];}
-              if(rates[a2]['END'] != null){
-                txtInsrt[i++] = ' to ';
-                txtInsrt[i++] = rates[a2]['END'];}
-              if(rates[a2]['DESC'] != null){
-                txtInsrt[i++] = rates[a2]['DESC'];}
-              if(rates[a2]['RATE'] != null){
-                txtInsrt[i++] = ',   ';
-                txtInsrt[i++] = '   $';
-                txtInsrt[i++] = rates[a2]['RATE'];}
-              if(rates[a2]['RQ'] != null){
-                txtInsrt[i++] = '   ';
-                txtInsrt[i++] = rates[a2]['RQ'];}
-              if(rates[a2]['RR'] != null){
-                txtInsrt[i++] = ',   ';
-                txtInsrt[i++] = rates[a2]['RR'];}
+          if(rate_length){
+            txt_insert[i++] = '<br><i class="tiny material-icons">payment</i><b> Rates: </b>';
+            for (var a2 = 0; a2 < rate_length; a2 += 1) {
+              txt_insert[i++] = '<br>';
+              if(rates[a2]['BEG']) txt_insert[i++] = rates[a2]['BEG'];
+              if(rates[a2]['END']) txt_insert[i++] = ' to ' + rates[a2]['END'];
+              if(rates[a2]['DESC']) txt_insert[i++] = rates[a2]['DESC'];
+              if(rates[a2]['RATE']) txt_insert[i++] = ',  $' + rates[a2]['RATE'];
+              if(rates[a2]['RQ']) txt_insert[i++] = ',   ' + rates[a2]['RQ'];
+              if(rates[a2]['RR']) txt_insert[i++] = ',  ' + rates[a2]['RR'];
             }
           }
           txtInsrt[i++] = '</p></div></li> ';
