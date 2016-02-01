@@ -20,14 +20,24 @@
       function displayGarages(garages){
         // lodash _.forEach https://lodash.com/docs#forEach
         _.forEach(garages, function(val, key){
-          var txtInsrt = [];
+          var txt_insert = [];
           var i = 0;
           var hours = val['hours'];
-          var hrsLength = hours.length;
+          var hrs_length = hours.length;
           var rates = val['rates'];
-          var rateLength = rates.length;
+          var rate_length = rates.length;
+          var open = val['open_spaces'];
 
-          txtInsrt[i++] = '<li class="collection-item"><div class="collapsible-header">' + val['friendlyName'] + '</div><div class="collapsible-body"><p><b>Open Spaces: </b> ' + val['open_spaces'] + '/' + val['total_spaces'] + '<br><b>Hours: </b>';
+          txt_insert[i++] = '<li class="collection-item">';
+
+          if (parseInt(open) < 100){
+            txt_insert[i++] =  '<div class="collapsible-header red lighten-2 white-text">';}
+          else if (parseInt(open) >= 100 && parseInt(open) < 300){
+            txt_insert[i++] =  '<div class="collapsible-header blue lighten-2 white-text">';}
+          else {
+            txt_insert[i++] =  '<div class="collapsible-header green lighten-2 white-text">';}
+    
+          txt_insert[i++] = val['friendlyName'] + '</div><div class="collapsible-body"><p><b>Open Spaces: </b> ' + open + '/' + val['total_spaces'] + '<br><i class="tiny material-icons">schedule</i><b> Hours: </b>';
 
           if(hrs_length){
             for (var a = 0; a < hrs_length; a += 1) {
@@ -58,7 +68,7 @@
               if(rates[a2]['RR']) txt_insert[i++] = ',  ' + rates[a2]['RR'];
             }
           }
-          txtInsrt[i++] = '</p></div></li> ';
-          $('#garages').append(txtInsrt.join(''));
+          txt_insert[i++] = '</p></div></li> ';
+          $('#garages').append(txt_insert.join(''));
         })
       }
