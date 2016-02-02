@@ -1,6 +1,8 @@
 var _ = require('lodash')
 var random_name = require('node-random-name');
 var Firebase = require('firebase');
+var ref = new Firebase('https://spaceteam.firebaseio.com')
+var customers = [];
 
 // San Francisco
 var city_location = {
@@ -39,21 +41,33 @@ function simulate(){
 function enter(person){
   console.log('enter', person)
   // TODO: put this person in the Firebase
-  // var ref = new Firebase('your-firebase-url')
-  // ...
+  customers.append(person)
+  if (customers.hasOwnProperty(key)){
+    person = customers[key]
+  }
+  print('customers: ', customers)
+  var cust_ref = ref.child("customers")
+  var cust = cust_ref.push()
+  cust.set(person)
 }
 
 function leave(person){
   console.log('leave', person)
-  // TODO: remove this person from the Firebase
-  // var ref = new Firebase('your-firebase-url')
-  // ...
+  for (var key in customers){
+    if (customers.hasOwnProperty(key)){
+      person = customers[key]
+      customers.remove(person)
+    }
+  }
+  //var cust_ref = ref.child("customers")
+  //cust_ref.remove()
+
 }
 
 
 function clear(){
   // TODO: remove all people from the Firebase
-  // var ref = new Firebase('your-firebase-url')
+  ref.remove()
   // ...
 }
 
