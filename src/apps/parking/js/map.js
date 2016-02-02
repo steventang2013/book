@@ -62,13 +62,13 @@ function drawGarages(garages){
   var total = garage.total_spaces;
   
   if (parseInt(open) < 100){
-    color_icon = createIcon('img/redIcon.png', latlng);
+    color_icon = createIcon('img/redicon.png', latlng);
   }
   else if (parseInt(open) >= 100 && parseInt(open) < 300){
-    color_icon = createIcon('img/blueIcon.png', latlng);
+    color_icon = createIcon('img/bluedot.png', latlng);
   }
   else {
-    color_icon = createIcon('img/greenIcon.png', latlng);
+    color_icon = createIcon('img/greenicon.png', latlng);
   }
   
   var rate_data = getRate(garage);
@@ -106,7 +106,7 @@ function drawBuses(bus_data, bus_id){
 	  if (bus.vtype == 'bus'){
 		  bus_val = parseInt(bus.id);
 		  var busIcon = L.icon({
-			iconUrl: 'img/busIcon.png',
+			iconUrl: 'img/busicon.png',
 			iconSize: [20, 30],
 			popupAnchor: [0, 0]
 		  })

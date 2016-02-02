@@ -65,7 +65,7 @@ function drawGarages(garages){
     color_icon = createIcon('img/redicon.png', latlng);
   }
   else if (parseInt(open) >= 100 && parseInt(open) < 300){
-    color_icon = createIcon('img/blueicon.png', latlng);
+    color_icon = createIcon('img/bluedot.png', latlng);
   }
   else {
     color_icon = createIcon('img/greenicon.png', latlng);
