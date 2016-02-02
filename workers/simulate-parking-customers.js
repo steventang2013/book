@@ -1,6 +1,8 @@
 var _ = require('lodash')
 var random_name = require('node-random-name');
 var Firebase = require('firebase');
+var ref = new Firebase('https://spaceteam.firebaseio.com')
+var customers = [];
 
 // San Francisco
 var city_location = {
@@ -33,30 +35,23 @@ function simulate(){
   setTimeout(function(){
     leave(person)
   }, duration * 1000)
-
 }
 
 function enter(person){
-  console.log('enter', person)
-  // TODO: put this person in the Firebase
-  // var ref = new Firebase('your-firebase-url')
-  // ...
+  var cust_ref = ref.child(person.name)
+  cust_ref.set(person)
 }
 
 function leave(person){
-  console.log('leave', person)
-  // TODO: remove this person from the Firebase
-  // var ref = new Firebase('your-firebase-url')
-  // ...
+  // customers.remove(person)
+  var cust_ref = ref.child(person.name).remove()
 }
-
 
 function clear(){
-  // TODO: remove all people from the Firebase
-  // var ref = new Firebase('your-firebase-url')
+  // remove all people from the Firebase
+  ref.remove()
   // ...
 }
-
 
 // clear the firebase, so that the simulation always starts from no one
 clear()
