@@ -30,6 +30,17 @@
           <div class="container">
             <a href="index.html" class="brand-logo">SF Garage Space</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+			  <!-- Dropdown Trigger -->
+			<div class="dropdown right">
+			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Bus ID<span class="caret"></span></button>
+		  <ul class="dropdown-menu">
+			<li><a onclick="generateBus(2000)" >0-2000</a></li>
+			<li><a onclick="generateBus(4000)" >2001-4000</a></li>
+			<li><a onclick="generateBus(6000)" >4001-6000</a></li>
+			<li><a onclick="generateBus(8000)">6001-8000</a></li>
+			<li><a onclick="generateBus(10000)">8001-10000</a></li>
+		  </ul>
+		</div>
             <ul class="right hide-on-med-and-down">
               <li><a href="garages.html"><i class="small material-icons">list</i>List</a></li>
               <li><a href="garages_map.html"><i class="small material-icons">map</i>Map</a></li>

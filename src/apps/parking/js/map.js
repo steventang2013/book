@@ -1,18 +1,29 @@
 // create a firebase reference to the root
 var ref = new Firebase('https://publicdata-parking.firebaseio.com');
-
+var busRef = new Firebase('https://publicdata-transit.firebaseio.com');
 var data;
+var data1;
 
 // read data from the location san_francisco/garages, only once
-ref.child('san_francisco/garages').once('value', function(snapshot){
-  data = snapshot.val()
+function drawMap(){
+	ref.child('san_francisco/garages').once('value', function(snapshot){
+	  data = snapshot.val()
 
-  var garages = _.filter(data, function(d){
-      return _.has(d, 'open_spaces')
-  })
+	  var garages = _.filter(data, function(d){
+		  return _.has(d, 'open_spaces')
+	  })
 
-  drawGarages(garages)
-})
+	  drawGarages(garages)
+	})
+
+}
+
+function generateBus(bus_id){
+	busRef.child('sf-muni/vehicles').on('value', function(snapshot){
+		data1 = snapshot.val()
+		drawBuses(data1, bus_id);
+	})
+}
 
 var attributionText = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a       href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
 
@@ -73,6 +84,44 @@ function drawGarages(garages){
 
 }
 
+function drawBuses(bus_data, bus_id){
+  // clear all existing markers (if any)
+  var bool = 0;
+  markersLayerGroup.clearLayers()
+  	map.eachLayer(function (layer) {
+		if (parseInt(layer._leaflet_id) == 22){
+			bool = 1;
+		}
+		else{
+			bool = 0;
+		}
+		if (bool == 0){
+			map.removeLayer(layer);
+		}
+	});
+  drawMap();	
+  console.log("method called");
+  _.forEach(bus_data, function(bus){
+	  var latlng = [bus.lat, bus.lon]
+	  if (bus.vtype == 'bus'){
+		  bus_val = parseInt(bus.id);
+		  var busIcon = L.icon({
+			iconUrl: 'img/busIcon.png',
+			iconSize: [20, 30],
+			popupAnchor: [0, 0]
+		  })
+		  if (bus_val >= bus_id-2000 && bus_val <= bus_id){
+			L.marker(latlng, {icon: busIcon}).addTo(map)
+		  }
+	  /*var circle = L.circle(latlng, 2, {
+		color: 'red',
+		fillColor: '#f03',
+		fillOpacity: 0.5
+	  }).addTo(map)*/
+	  }
+  })
+}
+
 function createIcon(image, latlng){
   var colorcon = L.icon({
     iconUrl: image,
@@ -103,3 +152,6 @@ function generate_modal(rate0, rate1){
   document.getElementById('rate-title').innerHTML = rate0
   document.getElementById('content-stuff').innerHTML = rate1
 }
+
+drawMap();
+generateBus(2000);
