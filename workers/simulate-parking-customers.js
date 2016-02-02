@@ -35,42 +35,23 @@ function simulate(){
   setTimeout(function(){
     leave(person)
   }, duration * 1000)
-
 }
 
 function enter(person){
-  console.log('enter', person)
-  // TODO: put this person in the Firebase
-  customers.append(person)
-  if (customers.hasOwnProperty(key)){
-    person = customers[key]
-  }
-  print('customers: ', customers)
-  var cust_ref = ref.child("customers")
-  var cust = cust_ref.push()
-  cust.set(person)
+  var cust_ref = ref.child(person.name)
+  cust_ref.set(person)
 }
 
 function leave(person){
-  console.log('leave', person)
-  for (var key in customers){
-    if (customers.hasOwnProperty(key)){
-      person = customers[key]
-      customers.remove(person)
-    }
-  }
-  //var cust_ref = ref.child("customers")
-  //cust_ref.remove()
-
+  // customers.remove(person)
+  var cust_ref = ref.child(person.name).remove()
 }
 
-
 function clear(){
-  // TODO: remove all people from the Firebase
+  // remove all people from the Firebase
   ref.remove()
   // ...
 }
-
 
 // clear the firebase, so that the simulation always starts from no one
 clear()
