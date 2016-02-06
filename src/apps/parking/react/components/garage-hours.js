@@ -1,10 +1,15 @@
 MyComponents.Hour = React.createClass({
   render: function() {
     return (
-      <div className="card">
-        <div className="card-content">
-          TODO: This is a component to display an item in the hours array
-          Raw props data is {JSON.stringify(this.props)}
+      <div className="row">
+        <div className="col s6 l3">
+          {this.props.hour.BEG && this.props.hour.BEG + ' to '}
+          {this.props.hour.END && this.props.hour.END + ', '}
+        </div>
+        <div className="col s6 l3">
+          {this.props.hour.FROM && this.props.hour.FROM}
+          {this.props.hour.TO && ' to '}
+          {this.props.hour.TO && this.props.hour.TO}
         </div>
       </div>
     );
@@ -22,9 +27,7 @@ MyComponents.GarageHours = React.createClass({
     return (
       <div className="card">
         <div className="card-content">
-          TODO: This is a component to display the hours of this garage.
-          Raw props data is {JSON.stringify(this.props)}
-
+          <h6><b>Hours: </b></h6>
           { hours }
 
         </div>
