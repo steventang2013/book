@@ -3,7 +3,7 @@ MyComponents.GarageTitle = React.createClass({
     return (
       <div className="card">
         <div className="card-content">
-          <h4>{this.props.title}</h4>          
+          <h2>{this.props.title}</h2>          
         </div>
       </div>
     );

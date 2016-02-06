@@ -3,7 +3,7 @@ MyComponents.GarageSpaces = React.createClass({
     return (
       <div className="card">
         <div className="card-content">
-          <h6><b>Open Spaces: </b>{this.props.open}/{this.props.total}</h6>
+          <h5><b>Open Spaces: </b>{this.props.open}/{this.props.total}</h5>
         </div>
       </div>
     );

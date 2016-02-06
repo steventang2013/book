@@ -4,7 +4,7 @@ MyComponents.Hour = React.createClass({
       <div className="row">
         <div className="col s6 l3">
           {this.props.hour.BEG && this.props.hour.BEG + ' to '}
-          {this.props.hour.END && this.props.hour.END + ', '}
+          {this.props.hour.END && this.props.hour.END}
         </div>
         <div className="col s6 l3">
           {this.props.hour.FROM && this.props.hour.FROM}
@@ -27,7 +27,7 @@ MyComponents.GarageHours = React.createClass({
     return (
       <div className="card">
         <div className="card-content">
-          <h6><b>Hours: </b></h6>
+          <h5><b>Hours: </b></h5>
           { hours }
 
         </div>
