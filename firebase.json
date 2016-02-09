@@ -1,5 +1,5 @@
 {
-  "firebase": "SpaceTeam",
+  "firebase": "stangresumeapp",
   "public": "build",
   "ignore": [
     "firebase.json",
