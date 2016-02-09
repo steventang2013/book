@@ -3,9 +3,7 @@ MyComponents.GarageTitle = React.createClass({
     return (
       <div className="card">
         <div className="card-content">
-          TODO: This is a component to display the title of this garage
-          Raw props data is {JSON.stringify(this.props)}
-          <h1>{this.props.title}</h1>          
+          <h2>{this.props.title}</h2>          
         </div>
       </div>
     );

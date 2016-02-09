@@ -1,8 +1,10 @@
 // create a firebase reference to the root
 var ref = new Firebase('https://publicdata-parking.firebaseio.com');
 var busRef = new Firebase('https://publicdata-transit.firebaseio.com');
+var custRef = new Firebase('https://spaceteam.firebaseio.com');
 var data;
 var data1;
+var data2;
 
 // read data from the location san_francisco/garages, only once
 function drawMap(){
@@ -25,6 +27,12 @@ function generateBus(bus_id){
 	})
 }
 
+	custRef.on('value', function(snapshot){
+		data2 = snapshot.val()
+    markersLayerGroupUser.clearLayers()
+		drawCustomers(data2);
+	})
+
 var attributionText = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a       href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
 
 // create the map
@@ -38,8 +46,10 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // create a layer group to hold all the markers
 var markersLayerGroup = L.layerGroup()
+var markersLayerGroupUser = L.layerGroup()
 // add the makers layer group to the map
 markersLayerGroup.addTo(map)
+markersLayerGroupUser.addTo(map)
 
 // visualize garages on a map
 function drawGarages(garages){
@@ -119,6 +129,18 @@ function drawBuses(bus_data, bus_id){
 		fillOpacity: 0.5
 	  }).addTo(map)*/
 	  }
+  })
+}
+
+function drawCustomers(data2){
+  _.forEach(data2, function(users){
+    var latlng = [users.lat, users.lon]
+    var custIcon = L.icon({
+			iconUrl: 'img/customer.png',
+			iconSize: [20, 30],
+			popupAnchor: [0, 0]
+		  })
+			L.marker(latlng, {icon: custIcon}).addTo(map)
   })
 }
 

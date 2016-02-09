@@ -4,8 +4,9 @@ var ref = new Firebase('https://publicdata-parking.firebaseio.com');
 var data
 
 // read data from the location san_francisco/garages, only once
-ref.child('san_francisco/garages').once('value', function(snapshot){
+ref.child('san_francisco/garages').on('value', function(snapshot){
   data = snapshot.val()
+  $("#garages").empty();
   console.log('data is loaded', data)
 
   // filter the data
@@ -37,7 +38,7 @@ function displayGarages(garages){
     else {
       txt_insert[i++] =  '<div class="card green lighten-2 white-text">';}
 
-    txt_insert[i++] = '<div class="card-content row"><div class="col s12"><p><span class="card-title">' + val['friendlyName'] + '</span></p></div><div class="col s12 m6 l4"><p><b>Open Spaces: </b><br> ' + open + '/' + val['total_spaces'] + '<br><br><b> Hours: </b>';
+    txt_insert[i++] = '<div class="card-content row"><div class="col s12"><p><span class="card-title">' + val['friendlyName'] + '</span></p></div><div class="col s12 m6"><p><b>Open Spaces: </b><br> ' + open + '/' + val['total_spaces'] + '<br><br><b> Hours: </b>';
 
     if(hrs_length){
       for (var a = 0; a < hrs_length; a += 1) {
@@ -56,7 +57,7 @@ function displayGarages(garages){
       if(hours['END']) txt_insert[i++] = ' to ' + hours['END'];
     }
 
-    txt_insert[i++] = '</p></div><div class="col s12 m6 l4"><p><b> Rates: </b>';
+    txt_insert[i++] = '</p></div><div class="col s12 m6"><p><b> Rates: </b>';
 
     if(rate_length){
       for (var a2 = 0; a2 < rate_length; a2 += 1) {
