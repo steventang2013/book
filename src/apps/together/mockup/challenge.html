@@ -30,6 +30,26 @@
 		  p{
 			color: white;
 		  }
+		  
+		 @media screen and (max-width: 1024px){
+			h1{
+			   margin-top: 150px;
+			   margin-bottom: 30px;
+			   font-size: 60px;
+			   font-weight: bold;
+			   text-shadow: 3px 3px 3px black;
+			   z-index: 99;
+			}
+			
+			.images {
+				height: 200px;
+			}
+
+			.tab-md {
+				width: 32.5%;
+				display: inline-block;
+			}
+		  }
 		
 	  </style>
 </head>
@@ -39,7 +59,7 @@
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+	  
       <nav class="navbar-fixed-top">
         <div class="nav-wrapper black darken-2 ">
           <div class="container">
@@ -60,10 +80,10 @@
 	  <div class="container">
 		<div class="row">
 		  <h1 class="text-center">CHALLENGE TEMPLATES</h1>
-		  <div class="col-md-4">
+		  <div class="col-md-4 tab-md">
 			  <div class="card" style="border: 2px solid black;">
 			    <div class="card-image" style="border-bottom: 2px solid black;">
-					<img src="img/sillypic.jpg" style="height: 300px">
+					<img src="img/sillypic.jpg" class="images">
 				</div>
 				<div class="card-content">
 				  <span class="card-title" style="color: black;"><b>SILLY PICTURE</b></span><br/>
@@ -78,10 +98,10 @@
 				</div>
 			  </div>
 		  </div>
-		  <div class="col-md-4">
+		  <div class="col-md-4 tab-md">
 			  <div class="card" style="border: 2px solid black;">
 				<div class="card-image" style="border-bottom: 2px solid black;">
-					<img src="img/pepper.jpg" style="height: 300px">
+					<img src="img/pepper.jpg" class="images">
 				</div>
 				<div class="card-content">
 				  <span class="card-title" style="color: black;"><b>PEPPER CHALLENGE</b></span>
@@ -96,10 +116,10 @@
 				</div>
 			  </div>
 		  </div>
-		  <div class="col-md-4">
+		  <div class="col-md-4 tab-md">
 			  <div class="card" style="border: 2px solid black;">
 				<div class="card-image" style="border-bottom: 2px solid black;">
-					<img src="img/social.jpg" style="height: 300px">
+					<img src="img/social.jpg" class="images">
 				</div>
 				<div class="card-content">
 				  <span class="card-title" style="color: black;"><b>SOCIAL CHALLENGE</b></span>
