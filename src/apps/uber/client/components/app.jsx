@@ -1,21 +1,35 @@
 class App extends React.Component {
   render(){
+    var log;
+    var signout;
+    if(this.props.actions.login) {
+      log = this.props.actions.login
+      signout = this.props.actions.logout
+    }
+    else {
+      log = this.props.actions.loginFB
+      signout = this.props.actions.logoutFB
+    }
     return <div>
+
       <MyComponents.NavBar actions={this.props.actions}/>
-      <div className="card">
         <MyComponents.User
             user={this.props.data.user}
-            loginAction={this.props.actions.login}
-            logoutAction={this.props.actions.logout}/>
-      </div>
-      <div className="card">
+            actions={this.props.actions}
+            loginAction={log}
+            logoutAction={signout}/>
+
+        <div className="container">
+
         <MyComponents.MapView
-            providers={this.props.data.providers}
+            premProviders={this.props.data.premProviders}
+			stdProviders={this.props.data.stdProviders}
             center={this.props.data.center}
             user={this.props.data.user}
             setUserLocationAction={this.props.actions.setUserLocation}/>
-      </div>
+          </div>
     </div>
+
   }
 }
 

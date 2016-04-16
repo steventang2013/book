@@ -1,18 +1,17 @@
-class ProviderList extends React.Component {
+class StdProviderList extends React.Component {
   render(){
     var providerArr = []
     var evens = []
 	var odds = []
     
-    var providers = this.props.premProviders;
+    var providers = this.props.stdProviders;
 		for (var key in providers){	    
 			providerArr.push(
           			<div className="card brown darken-3" key={providers[key].name}>
             			<div className="card-content white-text">
             	  			<span className="card-title">{providers[key].name}</span>
               				<p>
-              					{providers[key].specialty}<br />
-              					{providers[key].rating} Stars<br />
+              					{providers[key].rating} Stars
               				</p>
             			</div>
           			</div>)
@@ -38,4 +37,4 @@ class ProviderList extends React.Component {
 		);
   }
 }
-MyComponents.ProviderList = ProviderList
+MyComponents.StdProviderList = StdProviderList

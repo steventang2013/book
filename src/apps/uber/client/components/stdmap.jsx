@@ -1,51 +1,53 @@
+
 const {Map, Marker, CircleMarker, Popup, TileLayer, MapLayer}  = window.ReactLeaflet
 
-class ProviderMap extends React.Component {
+class StdMapView extends React.Component {
   render(){
-    console.log("pmap:"+this.props.premProviders)
-  const providers = this.props.premProviders
+
+    const providers = this.props.stdProviders
+
     const providerElements = _.map(providers, function(p,i){
       var latlng = [p.lat, p.lon]
-      var myIconURL = '../icons/' + p.specialty.toLowerCase() + '.png'
-      var myIcon = L.icon({
-        iconUrl: myIconURL,
-        iconSize:  [32]
-      })
-      var myRating = p.rating + " stars"
-      return <Marker position={latlng} icon={myIcon} key={i}>
+      console.log("Std Providers: "+p.name)
+      return <Marker position={latlng} key={i}>
         <Popup>
-          <span>{(p.name)}<br />{(p.specialty)}<br />{(myRating)}</span>
+          <span>{(p.name)}<br />{(p.specialty)}<br />{(p.rating)}</span>
         </Popup>
       </Marker>
     })
 
     let userElement
     if (this.props.user){
-      userElement = <CircleMarker center={this.props.users.pos}/>
+      userElement = <CircleMarker center={this.props.user.pos}/>
     } else {
       userElement = ''
     }
 
     // Note: .bind(this) is important for the handler function's 'this'
-    // pointer to refer to this ProviderMap instance
+    // pointer to refer to this MapView instance
 
-    return  <div><center><h4><b>PREMIUM COOKIT CHEFS</b></h4></center><Map className="map-div" center={this.props.center}
+    if (this.props.user) {
+    return  <div className="container grey darken-3">
+    <h2>Standard service providers:</h2><Map center={this.props.center}
           zoom={13}
           onLeafletClick={this.handleLeafletClick.bind(this)}>
         <TileLayer
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'/>
-
         {providerElements}
         {userElement}
       </Map></div>
+    }
+    else {
+      return <div></div>
+    }
   }
+
 
   handleLeafletClick(event){
     console.log('leaflet click event', event)
-    //this.props.setUserLocationAction(event.latlng)
+    this.props.setUserLocationAction(event.latlng)
   }
 }
 
-MyComponents.ProviderMap = ProviderMap
-
+MyComponents.StdMapView = StdMapView

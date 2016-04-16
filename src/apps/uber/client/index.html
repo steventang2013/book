@@ -20,7 +20,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
     <!-- https://github.com/PaulLeCam/react-leaflet -->
     <script src="https://npmcdn.com/react-leaflet/dist/react-leaflet.min.js"></script>
@@ -31,12 +30,56 @@
         width: 80%;
         margin: 0 auto;
       }
+	  p{
+		color: white;
+	  }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+    ​
+    main {
+      flex: 1 0 auto;
+    }
+    .leaflet-popup-content-wrapper {
+      background-color: #37474f
+    }
+    
     </style>
 
   </head>
   <body>
-    <div id="app-container" class="container">
-    </div>
+    <header></header>
+    <main>
+      <div id="app-container"></div>
+    </main>
+    <footer class="page-footer blue-grey darken-4">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">    </h5>
+            <h2 class="grey-text text-lighten-4">CookIt</h2>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Team Members</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="https://github.com/Huriphoonado">Willie Payne</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://github.com/Paigej">Paige Johnson</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://github.com/steventang2013">Steven Tang</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://github.com/kavyaravikumar">Kavya Ravikumar</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://github.com/varshinij">Varshini Jagannath</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+          © Copyright, CookIt 2016
+        </div>
+      </div>
+    </footer>
 
     <script>
       // MyComponents is a global object where each property is a reference to a component class
@@ -46,13 +89,14 @@
     <!-- import each component class in components/ -->
     <!-- The order is important. Dependencies must be loaded first -->
     <script type="text/babel" src="components/navbar.jsx"></script>
-    <script type="text/babel" src="components/team.jsx"></script>
+    <!--<script type="text/babel" src="components/team.jsx"></script> -->
     <script type="text/babel" src="components/map.jsx"></script>
+	
+	<!--<script type="text/babel" src="components/stdmap.jsx"></script>-->
     <script type="text/babel" src="components/user.jsx"></script>
 
     <!-- Main app container -->
     <script type="text/babel" src="components/app.jsx"></script>
-
     <!-- Connect the app and data -->
     <script type="text/babel" src="data.jsx"></script>
 
